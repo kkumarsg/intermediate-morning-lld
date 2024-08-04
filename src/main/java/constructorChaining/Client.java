@@ -10,3 +10,14 @@ public class Client {
         D d1 = new D("Keerthi");
     }
 }
+
+
+class Circle {
+
+    int radius;
+    static double PI = 3.14;
+
+
+}
+
+
