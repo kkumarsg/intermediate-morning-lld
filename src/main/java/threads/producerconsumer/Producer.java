@@ -18,7 +18,7 @@ public class Producer implements Runnable{
         while(true) {
 
             try {
-                System.out.println("Producer produced");
+//                System.out.println("Producer produced");
                 producerSemaphore.acquire();
 //                Thread.sleep(100);
             } catch (InterruptedException e) {

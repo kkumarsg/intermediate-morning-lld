@@ -19,6 +19,8 @@ public class PriorityQueueDemo {
         numbers.add(30);
         numbers.add(12);
 
+
+
         Collections.sort(numbers);
 
 //        System.out.println("numbers = " + numbers);

@@ -3,6 +3,7 @@ package threads.producerconsumer;
 import constructorChaining.A;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Store {
@@ -12,7 +13,7 @@ public class Store {
 
     public Store(int maxSize) {
         this.maxSize = maxSize;
-        items = new ArrayList<>();
+        items = Collections.synchronizedList(new ArrayList<>());
     }
 
     public int getMaxSize() {

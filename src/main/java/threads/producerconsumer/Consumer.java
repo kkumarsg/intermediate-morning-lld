@@ -17,9 +17,8 @@ public class Consumer implements Runnable{
     @Override
     public void run() {
         while(true) {
-
             try {
-                System.out.println("Consumer consumed");
+//                System.out.println("Consumer consumed");
                 consumerSemaphore.acquire();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
