@@ -43,4 +43,13 @@ public class Board {
     public void setBoard(List<List<Cell>> board) {
         this.board = board;
     }
+
+    public void printBoard() {
+        for(List<Cell> row: board){
+            for(Cell cell: row){
+                cell.display();
+            }
+            System.out.println();
+        }
+    }
 }

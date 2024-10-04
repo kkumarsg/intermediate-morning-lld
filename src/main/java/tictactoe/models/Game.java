@@ -33,6 +33,10 @@ public class Game {
         return new GameBuilder();
     }
 
+    public void print() {
+        board.printBoard();
+    }
+
     public static class GameBuilder {
         private List<Player> players;
         private List<WinningStrategy> winningStrategies;
@@ -44,16 +48,19 @@ public class Game {
             this.dimension = 0;
         }
 
-        public void setPlayers(List<Player> players) {
+        public GameBuilder setPlayers(List<Player> players) {
             this.players = players;
+            return this;
         }
 
-        public void setWinningStrategies(List<WinningStrategy> winningStrategies) {
+        public GameBuilder setWinningStrategies(List<WinningStrategy> winningStrategies) {
             this.winningStrategies = winningStrategies;
+            return this;
         }
 
-        public void setDimension(int dimension) {
+        public GameBuilder setDimension(int dimension) {
             this.dimension = dimension;
+            return this;
         }
 
         public Game build() throws MoreThanOneBotException, PlayersCountDimensionMismatchException, DuplicateSymbolException {
