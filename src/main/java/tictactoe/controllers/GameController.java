@@ -31,7 +31,15 @@ public class GameController {
                 .build();
     }
 
+    public void makeMove(Game game){
+        game.makeMove();
+    }
+
     public void printGame(Game game){
         game.print();
+    }
+
+    public void undo(Game game) {
+        game.undo();
     }
 }

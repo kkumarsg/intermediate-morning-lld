@@ -19,7 +19,7 @@ public class EasyBotPlayingStrategy implements BotPlayingStrategy {
 
     @Override
     public Cell makeMove(Board board) {
-
+        System.out.println("Bot is making the move ");
         for(List<Cell> eachRow: board.getBoard()){
             for(Cell cell: eachRow){
                 if (CellState.EMPTY.equals(cell.getCellState())) {

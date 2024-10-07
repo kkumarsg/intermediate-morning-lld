@@ -37,6 +37,88 @@ public class Game {
         board.printBoard();
     }
 
+    public void makeMove() {
+        Player player = players.get(nextPlayerIndex);
+        Cell cell = player.makeMove(board);
+
+        Move move = new Move(cell, player);
+        moves.add(move);
+
+        if(checkWinner(move, board)){
+            gameState = GameState.SUCCESS;
+            winner = player;
+            return ;
+        }
+
+        if(moves.size()== board.getDimension()* board.getDimension()){
+            gameState =GameState.DRAW;
+            return ;
+        }
+
+        nextPlayerIndex++;
+        // 1->2, there's no third player.
+        // In this case we need to reset 2-> 0
+        // 2 players -> (0, 1)
+        nextPlayerIndex = nextPlayerIndex % players.size();
+
+    }
+
+    private boolean checkWinner(Move move, Board board) {
+
+        for(WinningStrategy winningStrategy: winningStrategies){
+            if(winningStrategy.checkWinner(board, move)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void undo() {
+
+        if (checkIfMovesAreEmpty()) return;
+        Move lastMove = removeLastMove();
+        makeLastCellEmpty(lastMove);
+        handleStrategies(lastMove);
+        updateNextPlayerToPrevPlayer();
+    }
+
+    private void updateNextPlayerToPrevPlayer() {
+        if(nextPlayerIndex==0){
+            nextPlayerIndex = players.size()-1;
+        }
+        else {
+            nextPlayerIndex = nextPlayerIndex - 1;
+        }
+    }
+
+    private void handleStrategies(Move lastMove) {
+        for(WinningStrategy winningStrategy: winningStrategies){
+            winningStrategy.handleUndo(board, lastMove);
+        }
+    }
+
+    private static void makeLastCellEmpty(Move lastMove) {
+        Cell cell = lastMove.getCell();
+        cell.setPlayer(null);
+        cell.setCellState(CellState.EMPTY);
+    }
+
+    private Move removeLastMove() {
+        Move lastMove = moves.get(moves.size() - 1);
+
+        moves.remove(lastMove);
+        return lastMove;
+    }
+
+    private boolean checkIfMovesAreEmpty() {
+        if(moves.size()==0){
+            System.out.println("No moves done ");
+            return true;
+        }
+        return false;
+    }
+
+
     public static class GameBuilder {
         private List<Player> players;
         private List<WinningStrategy> winningStrategies;

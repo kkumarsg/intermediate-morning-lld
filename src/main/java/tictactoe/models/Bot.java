@@ -23,4 +23,12 @@ public class Bot extends Player{
     public void setBotDifficultyLevel(BotDifficultyLevel botDifficultyLevel) {
         this.botDifficultyLevel = botDifficultyLevel;
     }
+
+    @Override
+    public Cell makeMove(Board board){
+        Cell cell = botPlayingStrategy.makeMove(board);
+        cell.setCellState(CellState.FILLED);
+        cell.setPlayer(this);
+        return cell;
+    }
 }
